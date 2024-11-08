@@ -12,7 +12,7 @@ This web project is a full-stack application combining **Django** and **React** 
 - **Blockchain Storage**:
   - Stores tournament and game data securely using **Solidity smart contracts** on the **Ganache** testnet.
 - **Modern Tech Stack**: Built with **Django** for backend and **React** with TypeScript for frontend.
-- 
+
 ---
 
 ## Key Features
