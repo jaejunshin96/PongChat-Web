@@ -1,9 +1,18 @@
 # ft_transcendence
 
-## Project Overview
+## Overview
 
-This web project is a full-stack application that combines a **Django** backend with a **React** frontend to deliver a feature-rich pong tournament platform. Users can join real-time tournaments, participate in a multiplayer pong game, engage in live chats, and enjoy secure user authentication with **2FA** integration using the 42 School API. Built with modern web technologies, this platform also utilizes a blockchain storage layer with **Solidity smart contracts** and the **Ganache** testnet to store tournament and game data securely.
+This web project is a full-stack application combining **Django** and **React** to create a feature-rich pong tournament platform with:
 
+- **Real-Time Tournaments**: Users can join and compete in live pong tournaments.
+- **Multiplayer Pong Game**: Interactive, real-time pong matches with other players.
+- **Live Chat System**: Engage in live conversations with other users and send game invites through chat.
+- **Secure User Authentication**:
+  - Two-Factor Authentication (2FA) using the **42 School API** for added security.
+- **Blockchain Storage**:
+  - Stores tournament and game data securely using **Solidity smart contracts** on the **Ganache** testnet.
+- **Modern Tech Stack**: Built with **Django** for backend and **React** with TypeScript for frontend.
+- 
 ---
 
 ## Key Features
