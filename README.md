@@ -1,8 +1,8 @@
 # PongChat Website 
-<img width="500" alt="Screenshot 2025-02-28 at 5 11 56 pm" src="https://github.com/user-attachments/assets/940be775-8c2b-4bf9-a8b1-a155a3cf541c" />
-<img width="500" alt="Screenshot 2024-11-11 at 3 37 20 pm" src="https://github.com/user-attachments/assets/ee6a8671-98df-4ffd-a430-2955dea9ba60">
-<img width="500" alt="Screenshot 2024-11-11 at 3 36 59 pm" src="https://github.com/user-attachments/assets/00f2ad8e-845c-49a0-8f31-355f88caeede">
-<img width="500" alt="Screenshot 2024-11-11 at 3 37 34 pm" src="https://github.com/user-attachments/assets/4881e20f-3013-4953-8b7e-1bb3f294aef0">
+<img width="700" alt="Screenshot 2025-02-28 at 5 11 56 pm" src="https://github.com/user-attachments/assets/940be775-8c2b-4bf9-a8b1-a155a3cf541c" />
+<img width="700" alt="Screenshot 2024-11-11 at 3 37 20 pm" src="https://github.com/user-attachments/assets/ee6a8671-98df-4ffd-a430-2955dea9ba60">
+<img width="700" alt="Screenshot 2024-11-11 at 3 36 59 pm" src="https://github.com/user-attachments/assets/00f2ad8e-845c-49a0-8f31-355f88caeede">
+<img width="700" alt="Screenshot 2024-11-11 at 3 37 34 pm" src="https://github.com/user-attachments/assets/4881e20f-3013-4953-8b7e-1bb3f294aef0">
 
 # Project Team
 - **Jaejun Shin (https://github.com/jaejunshin96)**
@@ -70,35 +70,4 @@ This web project is a full-stack application combining **Django** and **React** 
   - Tournament and match data are stored on the blockchain, ensuring tamper-proof and transparent records of match outcomes.
   - Future scalability to integrate with Ethereum or another mainnet for production-ready data integrity.
 
----
-
-# How to Run
-
-<ul>
-    <li>Ensure Docker is installed on your machine.</li>
-    <li>Clone this repository and navigate to the folder:</li>
-</ul>
-
-```bash
-git clone https://github.com/jaejunshin96/PongChat-Web.git
-cd PongChat-Web
-```
-There are two methods to run the project. If you want to view the frontend without making changes, run:
-```bash
-make
-```
-Otherwise, use Docker commands. For this, you'll need two terminals:
-<ul>
-<li>The first terminal will watch the repository for changes.</li>
-<li>The second terminal will run the containers.</li>
-</ul>
-
-First terminal:
-```bash
-docker compose watch
-```
-Second terminal:
-```bash
-docker compose up
-```
 ---
