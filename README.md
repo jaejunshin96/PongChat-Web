@@ -1,17 +1,34 @@
-PongChat Website
-<img width="1179" alt="Screenshot 2025-02-28 at 5 11 56 pm" src="https://github.com/user-attachments/assets/940be775-8c2b-4bf9-a8b1-a155a3cf541c" />
-<img width="1117" alt="Screenshot 2024-11-11 at 3 37 20 pm" src="https://github.com/user-attachments/assets/ee6a8671-98df-4ffd-a430-2955dea9ba60">
-<img width="1138" alt="Screenshot 2024-11-11 at 3 36 59 pm" src="https://github.com/user-attachments/assets/00f2ad8e-845c-49a0-8f31-355f88caeede">
-<img width="1364" alt="Screenshot 2024-11-11 at 3 37 34 pm" src="https://github.com/user-attachments/assets/4881e20f-3013-4953-8b7e-1bb3f294aef0">
+# PongChat Website 
+<img width="500" alt="Screenshot 2025-02-28 at 5 11 56 pm" src="https://github.com/user-attachments/assets/940be775-8c2b-4bf9-a8b1-a155a3cf541c" />
+<img width="500" alt="Screenshot 2024-11-11 at 3 37 20 pm" src="https://github.com/user-attachments/assets/ee6a8671-98df-4ffd-a430-2955dea9ba60">
+<img width="500" alt="Screenshot 2024-11-11 at 3 36 59 pm" src="https://github.com/user-attachments/assets/00f2ad8e-845c-49a0-8f31-355f88caeede">
+<img width="500" alt="Screenshot 2024-11-11 at 3 37 34 pm" src="https://github.com/user-attachments/assets/4881e20f-3013-4953-8b7e-1bb3f294aef0">
 
-## Project Team
+# Project Team
 - **Jaejun Shin (https://github.com/jaejunshin96)**
 - **Mehdi Mirzaie (https://github.com/MehdiMirzaie2)**
 - **Louis Xu (https://github.com/louissxu)**
 - **Jo Marks (https://github.com/markjso)**
 - **Isaac Vanderwal (https://github.com/vanderhammer91)**
 
-## Overview
+---
+
+# Tech Stack
+
+<div style="display: flex; align-items: flex-start;">
+    <img src="https://techstack-generator.vercel.app/django-icon.svg" alt="Django" width="65" height="65" />
+    <img src="https://techstack-generator.vercel.app/python-icon.svg" alt="Python" width="65" height="65" />
+    <img src="https://techstack-generator.vercel.app/react-icon.svg" alt="React" width="65" height="65" />
+    <img src="https://techstack-generator.vercel.app/ts-icon.svg" alt="TypeScript" width="65" height="65" />
+    <img src="https://techstack-generator.vercel.app/restapi-icon.svg" alt="REST API" width="65" height="65" />
+    <img src="https://techstack-generator.vercel.app/docker-icon.svg" alt="Docker" width="65" height="65" />
+    <img src="https://techstack-generator.vercel.app/nginx-icon.svg" alt="Nginx" width="65" height="65" />
+    <img src="https://user-images.githubusercontent.com/25181517/117208740-bfb78400-adf5-11eb-97bb-09072b6bedfc.png" width="65" height="65" alt="PostgreSQL" title="PostgreSQL"/>
+</div>
+
+---
+
+# Overview
 
 This web project is a full-stack application combining **Django** and **React** to create a feature-rich pong tournament platform with:
 
@@ -26,7 +43,7 @@ This web project is a full-stack application combining **Django** and **React** 
 
 ---
 
-## Key Features
+# Key Features
 
 - **User Authentication**:
   - Secure login and registration system using Django’s built-in authentication.
@@ -55,77 +72,33 @@ This web project is a full-stack application combining **Django** and **React** 
 
 ---
 
-## Tech Stack
+# How to Run
 
-### Backend
-- **Django** (Python): Powers the backend API, handles authentication, tournament management, and integrates with blockchain functions.
-- **Django Channels**: Manages real-time WebSocket connections for live chat and gameplay interactions.
-- **42 School API**: Used for OAuth2 and 2FA, leveraging the OAuth flow for secure login and access control.
+<ul>
+    <li>Ensure Docker is installed on your machine.</li>
+    <li>Clone this repository and navigate to the folder:</li>
+</ul>
 
-### Frontend
-- **React** (TypeScript): Provides a robust, type-safe front-end with a modular architecture for rendering the user interface.
-- **React Router**: Manages in-app navigation, making the app feel seamless and responsive.
-- **WebSocket API**: Supports real-time communication for live gameplay and chat functions.
+```bash
+git clone https://github.com/jaejunshin96/PongChat-Web.git
+cd PongChat-Web
+```
+There are two methods to run the project. If you want to view the frontend without making changes, run:
+```bash
+make
+```
+Otherwise, use Docker commands. For this, you'll need two terminals:
+<ul>
+<li>The first terminal will watch the repository for changes.</li>
+<li>The second terminal will run the containers.</li>
+</ul>
 
-### Blockchain
-- **Solidity**: Smart contracts deployed on the **Ganache** testnet to store tournament and game data securely.
-- **Ganache**: Local Ethereum blockchain used for testing and development, simulating a production blockchain environment.
-- **Web3.js**: JavaScript library to interact with the blockchain, making calls to smart contracts from the frontend.
-
+First terminal:
+```bash
+docker compose watch
+```
+Second terminal:
+```bash
+docker compose up
+```
 ---
-
-## System Architecture
-
-1. **Django Backend**:
-   - **API Layer**: Exposes a RESTful API to handle authentication, user data, and tournament management.
-   - **WebSocket Layer**: Manages real-time data flow for the live chat and multiplayer pong game using Django Channels.
-   - **Blockchain Integration**: Interfaces with the Ganache blockchain to push and retrieve game data securely.
-   
-2. **React Frontend**:
-   - **Component-Based UI**: Each feature (chat, tournament, pong game) is encapsulated as a React component, providing modularity and ease of maintenance.
-   - **State Management**: Uses React’s state management for real-time updates, keeping UI consistent with backend and WebSocket events.
-   - **TypeScript**: Enforces strict typing, catching errors early in development and ensuring a more reliable and robust application.
-
-3. **Blockchain Storage**:
-   - **Smart Contracts**: Custom smart contracts written in Solidity to store match and tournament data on the blockchain.
-   - **Web3.js**: Facilitates interaction with smart contracts, allowing the platform to write data to and read data from the blockchain in real time.
-
----
-
-## Core Functionalities
-
-- **User Authentication and 2FA**:
-  - OAuth2 authentication with the 42 School API.
-  - 2FA using tokens provided by the 42 API, ensuring user accounts are secure.
-  
-- **Live Chat and Invitations**:
-  - Live chat using WebSockets, allowing real-time messaging.
-  - Users can invite each other to pong matches or tournaments directly from the chat interface.
-  
-- **Tournament System**:
-  - Allows users to create and manage tournaments.
-  - Real-time updates for tournament brackets as players progress.
-
-- **Pong Game**:
-  - Multiplayer pong with real-time synchronization of movements and scoring.
-  - Uses WebSockets to handle the gameplay experience, with minimal latency.
-
-- **Blockchain Storage**:
-  - Stores key match and tournament data using Solidity smart contracts on Ganache.
-  - Ensures data integrity and security, making it resistant to tampering.
-
----
-
-## Skills Demonstrated
-
-- **Full-Stack Development**: Built a robust application with Django, React, and TypeScript, showcasing both backend and frontend skills.
-- **Real-Time Communication**: Implemented WebSockets for live chat and gameplay synchronization, providing a responsive user experience.
-- **Blockchain Development**: Developed Solidity smart contracts for secure data storage and integrated with Ganache, enabling tamper-proof tournament and match records.
-- **Authentication and Security**: Integrated 2FA via the 42 School API for enhanced user security.
-- **API Integration**: Leveraged the 42 School API for user data and authentication, and integrated with Web3.js for blockchain interactions.
-
----
-
-## Conclusion
-
-This project combines modern web development with cutting-edge technologies to deliver a secure and engaging pong tournament platform. With features like real-time chat, multiplayer gaming, secure authentication, and blockchain data storage, this application provides a comprehensive showcase of full-stack, real-time, and blockchain development skills.
