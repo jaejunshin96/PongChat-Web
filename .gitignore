@@ -302,3 +302,5 @@ dist
 
 # Ignore compiled contract json
 backend/scoreStorage.json
+
+.env.dev
