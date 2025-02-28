@@ -4,6 +4,13 @@ PongChat Website
 <img width="1138" alt="Screenshot 2024-11-11 at 3 36 59 pm" src="https://github.com/user-attachments/assets/00f2ad8e-845c-49a0-8f31-355f88caeede">
 <img width="1364" alt="Screenshot 2024-11-11 at 3 37 34 pm" src="https://github.com/user-attachments/assets/4881e20f-3013-4953-8b7e-1bb3f294aef0">
 
+## Project Team
+- **Jaejun Shin (https://github.com/jaejunshin96)**
+- **Mehdi Mirzaie (https://github.com/MehdiMirzaie2)**
+- **Louis Xu (https://github.com/louissxu)**
+- **Jo Marks (https://github.com/markjso)**
+- **Isaac Vanderwal (https://github.com/vanderhammer91)**
+
 ## Overview
 
 This web project is a full-stack application combining **Django** and **React** to create a feature-rich pong tournament platform with:
