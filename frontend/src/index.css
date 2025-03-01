@@ -1,0 +1,27 @@
+/* Global styles to ensure no white space when scrolling */
+html, body, #root {
+  background-color: black !important;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* Override any default browser styles that might show white */
+::-webkit-scrollbar-track {
+  background-color: black;
+}
+
+::-webkit-scrollbar {
+  background-color: black;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #333;
+}
+
+/* Fix for mobile browsers that may show white space when overscrolling */
+body {
+  overscroll-behavior: none;
+}

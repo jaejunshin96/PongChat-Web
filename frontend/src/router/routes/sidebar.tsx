@@ -5,15 +5,38 @@ import { useMediaQuery } from "react-responsive";
 import MobileNav from "./mobileNav";
 import DesktopNav from "./desktopNav";
 import "./game.css"
+import { CSSProperties } from "react";
+
+// Add a style block to handle the full-page background
+const sidebarStyles: {
+  container: CSSProperties;
+  row: CSSProperties;
+} = {
+  container: {
+    backgroundColor: 'black',
+    minHeight: '100vh',
+    width: '100%',
+    padding: 0,
+    margin: 0,
+    overflowX: 'hidden',
+    position: 'relative',
+  },
+  row: {
+    margin: 0,
+    height: '100%',
+  }
+};
+
 export default function SideBar() {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   return (
     <Container
       fluid
-      className="bg-black vh-100 vw-100"
+      className="bg-black"
+      style={sidebarStyles.container}
     >
-      <Row className="h-100">
+      <Row className="h-100" style={sidebarStyles.row}>
         {isMobile ? (
           <>
             <Col style={{ height: "16%" }}>

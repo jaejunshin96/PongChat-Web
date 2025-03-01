@@ -1,97 +1,127 @@
 import { useEffect, useState } from "react";
-import { Alert, Card, CardBody, CardTitle, CardText, Button, Container } from "reactstrap";
+import { Card, CardBody, CardTitle, CardText, Button, Container } from "reactstrap";
 import LocalPlayer from "./LocalPlayer.tsx";
 import { styles, ScoreBoard, Timer } from "./LocalStyles.tsx";
 import Ball from "./Ball.tsx";
 import { getUserDetails } from "../../../apicalls/ApiFriends.ts";
 import { useLoaderData } from "react-router-dom";
 
+// Types
 interface User {
   id: number;
   username: string;
 }
 
-export const loader = async () => {
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
-  if (user) {
-    const userDetails = await getUserDetails(user.username);
-    return userDetails;
-  }
-  return null;
-};
+interface PaddlePosition {
+  top: string;
+}
 
-const LocalGame = () => {
-  const [roomState, setRoomState] = useState("1");
-  const jwt_token = localStorage.getItem("access_token");
-  const user = useLoaderData() as User;
-  const [overlayMessage, setOverlayMessage] = useState("");
+interface PaddleState {
+  red: PaddlePosition;
+  blue: PaddlePosition;
+}
+
+interface BallPosition {
+  x: string;
+  y: string;
+}
+
+interface GameData {
+  paddles: PaddleState;
+  ballPosition: BallPosition;
+  player1Score: number;
+  player2Score: number;
+  minutes: number;
+  seconds: number;
+  overlayMessage: string;
+}
+
+// Constants
+const CONTROL_KEYS = ["w", "s", "o", "l"];
+
+// Custom hook for WebSocket management
+const useGameWebSocket = (username: string) => {
   const [ws, setWs] = useState<WebSocket>();
-  const [ballPosition, setBallPosition] = useState({ x: "50%", y: "50%" });
-  const [paddles, setPaddles] = useState({
-    red: { top: "40%" },
-    blue: { top: "40%" },
+  const [gameData, setGameData] = useState<GameData>({
+    paddles: {
+      red: { top: "40%" },
+      blue: { top: "40%" },
+    },
+    ballPosition: { x: "50%", y: "50%" },
+    player1Score: 0,
+    player2Score: 0,
+    minutes: 0,
+    seconds: 1,
+    overlayMessage: "",
   });
-
-  const [player1_score, setPlayer1_score] = useState<number>(0);
-  const [player2_score, setPlayer2_score] = useState<number>(0);
-  const [minutes, setMinutes] = useState<number>(0);
-  const [seconds, setSeconds] = useState<number>(1);
-
-  const handleStartButton = () => {
-    if (ws && ws.readyState === WebSocket.OPEN) {
-      ws.send(JSON.stringify({ type: "start_game" }));
-      setRoomState("2");
-    }
-  };
+  const [roomState, setRoomState] = useState("1"); // 1: Menu, 2: Game
 
   useEffect(() => {
-    const userString = user.username || "guest";
-    const newWs = new WebSocket(`${import.meta.env.VITE_CN_WS_URL}/ws/localgame/${userString}/`);
+    const userString = username || "guest";
+    const wsUrl = `${import.meta.env.VITE_CN_WS_URL}/ws/localgame/${userString}/`;
+    const newWs = new WebSocket(wsUrl);
 
     newWs.onopen = () => {
-      setWs(newWs); // Set ws state here to ensure it's available after connection
+      setWs(newWs);
     };
 
     newWs.onmessage = (message) => {
       const data = JSON.parse(message.data);
+
       if (data.type === "paddle_update") {
-        setPaddles({
-          red: { top: `${data.paddles.red.top}%` },
-          blue: { top: `${data.paddles.blue.top}%` },
-        });
+        setGameData(prev => ({
+          ...prev,
+          paddles: {
+            red: { top: `${data.paddles.red.top}%` },
+            blue: { top: `${data.paddles.blue.top}%` },
+          }
+        }));
       } else if (data.type === "ball_update") {
-        setBallPosition({
-          x: `${data.ball.x}%`,
-          y: `${data.ball.y}%`,
-        });
+        setGameData(prev => ({
+          ...prev,
+          ballPosition: {
+            x: `${data.ball.x}%`,
+            y: `${data.ball.y}%`,
+          }
+        }));
       } else if (data.type === "interval_update") {
-        setPlayer1_score(data.player1_score);
-        setPlayer2_score(data.player2_score);
-        setMinutes(data.minutes);
-        setSeconds(data.seconds);
+        setGameData(prev => ({
+          ...prev,
+          player1Score: data.player1_score,
+          player2Score: data.player2_score,
+          minutes: data.minutes,
+          seconds: data.seconds,
+        }));
       } else if (data.type === "overlay_update") {
         if (data.message === "MENU") {
-          setOverlayMessage("!");
+          setGameData(prev => ({
+            ...prev,
+            overlayMessage: "!"
+          }));
           setRoomState("1");
+        } else {
+          setGameData(prev => ({
+            ...prev,
+            overlayMessage: data.message
+          }));
         }
-        setOverlayMessage(data.message);
       }
     };
 
     newWs.onclose = () => {
-      setWs(undefined); // Clear ws state when connection is closed
+      setWs(undefined);
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
       const key = event.key.toLowerCase();
-      if (["w", "s", "o", "l"].includes(key) && newWs.readyState === WebSocket.OPEN) {
+      if (CONTROL_KEYS.includes(key) && newWs.readyState === WebSocket.OPEN) {
         newWs.send(JSON.stringify({ type: "keydown", key }));
       }
     };
 
     const handleKeyUp = (event: KeyboardEvent) => {
       const key = event.key.toLowerCase();
-      if (["w", "s", "o", "l"].includes(key) && newWs.readyState === WebSocket.OPEN) {
+      if (CONTROL_KEYS.includes(key) && newWs.readyState === WebSocket.OPEN) {
         newWs.send(JSON.stringify({ type: "keyup", key }));
       }
     };
@@ -106,55 +136,116 @@ const LocalGame = () => {
         newWs.close();
       }
     };
-  }, [user.username]);
+  }, [username]);
+
+  const startGame = () => {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify({ type: "start_game" }));
+      setRoomState("2");
+    }
+  };
+
+  return {
+    ws,
+    gameData,
+    roomState,
+    startGame
+  };
+};
+
+// UI Components
+const GameMenu = ({ onStart }: { onStart: () => void }) => (
+  <Container
+    className="h-100 overflow-auto"
+    style={{
+      maxWidth: "95%",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      minHeight: "80vh"
+    }}
+  >
+    <div className="imageContainer" style={{
+      position: "relative",
+      maxWidth: "900px",
+      margin: "0 auto"
+    }}>
+      <Button color="info" className="absoluteButton" onClick={onStart}>
+        Start
+      </Button>
+      <img
+        src="/LocalMenu.png"
+        alt="Squirtle playing table tennis"
+        className="leftImage"
+        style={{ width: "100%", height: "auto", borderRadius: "10px" }}
+      />
+
+      <div
+        style={{
+          position: "absolute",
+          top: "80%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          backgroundColor: "rgba(0, 0, 0, 0.7)",
+          padding: "12px",
+          borderRadius: "8px",
+          color: "white",
+          maxWidth: "40%",
+          fontSize: "0.95rem",
+          zIndex: 1
+        }}
+      >
+        <h5 style={{ fontSize: "1.2rem", marginBottom: "8px" }}>Pong Rules:</h5>
+        <p style={{ marginBottom: "6px" }}>The first player to 11 points, or with the most points when the time runs out wins!</p>
+        <p style={{ marginBottom: "6px" }}>
+          <b className="text-danger">Red</b> player controls: W (up), S (down).
+        </p>
+        <p style={{ marginBottom: "6px" }}>
+          <b className="text-info">Blue</b> player controls: O (up), L (down).
+        </p>
+      </div>
+    </div>
+  </Container>
+);
+
+const GameBoard = ({ gameData }: { gameData: GameData }) => (
+  <div className="pongArea">
+    <div
+      className="overlay"
+      style={{ visibility: gameData.overlayMessage && gameData.overlayMessage !== "!" ? "visible" : "hidden" }}
+    >
+      {gameData.overlayMessage}
+    </div>
+    <div className="middleLine"></div>
+    <div className="centerCircle"></div>
+    <LocalPlayer key="1" color="red" left="2" top={gameData.paddles.red.top} />
+    <LocalPlayer key="2" color="blue" left="93" top={gameData.paddles.blue.top} />
+    <Ball left={gameData.ballPosition.x} top={gameData.ballPosition.y} />
+    <ScoreBoard leftScore={gameData.player1Score} rightScore={gameData.player2Score} />
+    <Timer minutes={gameData.minutes} seconds={gameData.seconds} />
+  </div>
+);
+
+// Loader function
+export const loader = async () => {
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  if (user) {
+    const userDetails = await getUserDetails(user.username);
+    return userDetails;
+  }
+  return null;
+};
+
+// Main component
+const LocalGame = () => {
+  const user = useLoaderData() as User;
+  const { gameData, roomState, startGame } = useGameWebSocket(user?.username);
 
   return (
-    // <div className="d-flex flex-column justify-content-center h-100">
     <>
-      {/* <div className="d-flex flex-column bg-secondary p-2 h-100"> */}
-
-      {roomState === "1" && (
-        <Container className="h-100 overflow-auto">
-          <div className="imageContainer">
-            <Button color="info" className="absoluteButton" onClick={handleStartButton}>
-              Start
-            </Button>
-            <img src="/LocalMenu.png" alt="Squirtle playing table tennis" className="leftImage" />
-          </div>
-          <Card className="bg-black">
-            <CardBody className="text-light">
-              <CardTitle>Pong Rules:</CardTitle>
-              <CardText>
-                <p>The first player to 11 points, or with the most points when the time runs out wins!</p>
-                <p>
-                  <b className="text-danger">Red</b> player controls: W (up), S (down).
-                </p>
-                <p>
-                  <b className="text-info">Blue</b> player controls: O (up), L (down).
-                </p>
-              </CardText>
-            </CardBody>
-          </Card>
-        </Container>
-      )}
-      {roomState === "2" && (
-        <div className="pongArea">
-          <div
-            className="overlay"
-            style={{ visibility: overlayMessage && overlayMessage !== "!" ? "visible" : "hidden" }}
-          >
-            {overlayMessage}
-          </div>
-          <div className="middleLine"></div>
-          <div className="centerCircle"></div>
-          <LocalPlayer key="1" color="red" left="2" top={paddles.red.top} />
-          <LocalPlayer key="2" color="blue" left="93" top={paddles.blue.top} />
-          <Ball left={ballPosition.x} top={ballPosition.y} />
-          <ScoreBoard leftScore={player1_score} rightScore={player2_score} />
-          <Timer minutes={minutes} seconds={seconds} />
-        </div>
-      )}
-      {/* </div> */}
+      {roomState === "1" && <GameMenu onStart={startGame} />}
+      {roomState === "2" && <GameBoard gameData={gameData} />}
     </>
   );
 };
