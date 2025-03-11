@@ -1,11 +1,11 @@
 # PongChat Website
 
-[![Video demo link](https://img.youtube.com/vi/VIDEO_ID/hqdefault.jpg)](https://youtu.be/TDLBMM1MyM0)
+[![video deme link](https://img.youtube.com/vi/TDLBMM1MyM0/0.jpg)](https://www.youtube.com/watch?v=TDLBMM1MyM0)
 
-<img width="700" alt="Screenshot 2025-02-28 at 5 11 56 pm" src="https://github.com/user-attachments/assets/940be775-8c2b-4bf9-a8b1-a155a3cf541c" />
-<img width="700" alt="Screenshot 2024-11-11 at 3 37 20 pm" src="https://github.com/user-attachments/assets/ee6a8671-98df-4ffd-a430-2955dea9ba60">
-<img width="700" alt="Screenshot 2024-11-11 at 3 36 59 pm" src="https://github.com/user-attachments/assets/00f2ad8e-845c-49a0-8f31-355f88caeede">
-<img width="700" alt="Screenshot 2024-11-11 at 3 37 34 pm" src="https://github.com/user-attachments/assets/4881e20f-3013-4953-8b7e-1bb3f294aef0">
+<img width="500" alt="Screenshot 2025-02-28 at 5 11 56 pm" src="https://github.com/user-attachments/assets/940be775-8c2b-4bf9-a8b1-a155a3cf541c" />
+<img width="500" alt="Screenshot 2024-11-11 at 3 37 20 pm" src="https://github.com/user-attachments/assets/ee6a8671-98df-4ffd-a430-2955dea9ba60">
+<img width="500" alt="Screenshot 2024-11-11 at 3 36 59 pm" src="https://github.com/user-attachments/assets/00f2ad8e-845c-49a0-8f31-355f88caeede">
+<img width="500" alt="Screenshot 2024-11-11 at 3 37 34 pm" src="https://github.com/user-attachments/assets/4881e20f-3013-4953-8b7e-1bb3f294aef0">
 
 # Project Team
 - **Jaejun Shin (https://github.com/jaejunshin96)**
