@@ -1,6 +1,6 @@
 # PongChat Website
 
-[![video deme link](https://img.youtube.com/vi/TDLBMM1MyM0/0.jpg)](https://www.youtube.com/watch?v=TDLBMM1MyM0)
+**Video:** Watch the full demo on [YouTube](https://www.youtube.com/watch?v=TDLBMM1MyM0).
 
 <img width="500" alt="Screenshot 2025-02-28 at 5 11 56 pm" src="https://github.com/user-attachments/assets/940be775-8c2b-4bf9-a8b1-a155a3cf541c" />
 <img width="500" alt="Screenshot 2024-11-11 at 3 37 20 pm" src="https://github.com/user-attachments/assets/ee6a8671-98df-4ffd-a430-2955dea9ba60">
