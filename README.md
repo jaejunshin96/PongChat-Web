@@ -1,11 +1,12 @@
 # PongChat Website
 
-**Video:** Watch the full demo on [YouTube](https://www.youtube.com/watch?v=TDLBMM1MyM0).
+---
 
-<img width="700" alt="Screenshot 2025-02-28 at 5 11 56 pm" src="https://github.com/user-attachments/assets/940be775-8c2b-4bf9-a8b1-a155a3cf541c" />
-<img width="700" alt="Screenshot 2024-11-11 at 3 37 20 pm" src="https://github.com/user-attachments/assets/ee6a8671-98df-4ffd-a430-2955dea9ba60">
-<img width="700" alt="Screenshot 2024-11-11 at 3 36 59 pm" src="https://github.com/user-attachments/assets/00f2ad8e-845c-49a0-8f31-355f88caeede">
-<img width="700" alt="Screenshot 2024-11-11 at 3 37 34 pm" src="https://github.com/user-attachments/assets/4881e20f-3013-4953-8b7e-1bb3f294aef0">
+**Video:** Watch the full demo on Youtube
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/TDLBMM1MyM0/0.jpg)](https://www.youtube.com/watch?v=TDLBMM1MyM0)
+
+---
 
 # Project Team
 - **Jaejun Shin (https://github.com/jaejunshin96)**
@@ -72,5 +73,12 @@ This web project is a full-stack application combining **Django** and **React** 
   - Blockchain integration for secure data storage using **Solidity** smart contracts and **Ganache** as the test network.
   - Tournament and match data are stored on the blockchain, ensuring tamper-proof and transparent records of match outcomes.
   - Future scalability to integrate with Ethereum or another mainnet for production-ready data integrity.
+
+---
+
+<img width="700" alt="Screenshot 2025-02-28 at 5 11 56 pm" src="https://github.com/user-attachments/assets/940be775-8c2b-4bf9-a8b1-a155a3cf541c" />
+<img width="700" alt="Screenshot 2024-11-11 at 3 37 20 pm" src="https://github.com/user-attachments/assets/ee6a8671-98df-4ffd-a430-2955dea9ba60">
+<img width="700" alt="Screenshot 2024-11-11 at 3 36 59 pm" src="https://github.com/user-attachments/assets/00f2ad8e-845c-49a0-8f31-355f88caeede">
+<img width="700" alt="Screenshot 2024-11-11 at 3 37 34 pm" src="https://github.com/user-attachments/assets/4881e20f-3013-4953-8b7e-1bb3f294aef0">
 
 ---
